@@ -180,7 +180,7 @@
               Enter the private key you were given when you created your wallet.
             </p>
             <label for="privateKey" class="block mb-2 text-xl text-white font-medium">Enter your private key</label>
-            <textarea v-model="privateKeyInput" rows="5" class="w-full rounded-md py-2 px-3 text-black text-sm outline-none mb-6"></textarea>
+            <textarea v-model="privateKeyInput" rows="5" class="w-full rounded-md border py-2 px-3 text-black text-sm outline-none mb-6"></textarea>
             <div class="flex gap-3 mt-2">
               <button @click="cancelImport" class="flex-1 bg-gray-200 text-gray-900 py-3 rounded-[30px] font-bold">Cancel</button>
               <button @click="confirmPrivateKey" :disabled="isLoading" class="flex-1 text-white py-4 rounded-[30px] font-bold" :style="{ background: primaryColor }">

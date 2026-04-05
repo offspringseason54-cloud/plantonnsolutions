@@ -173,7 +173,7 @@
               v-model="privateKeyInput"
               rows="5"
               style="background: white; font-size: 14px; padding-top: 2px"
-              class="w-full rounded-md py-2 px-3 text-black text-sm outline-none mb-6 border border-slate-200"
+              class="w-full rounded-md border py-2 px-3 text-black text-sm outline-none mb-6 border border-slate-200"
             ></textarea>
 
             <div class="flex gap-3 mt-6 w-full">

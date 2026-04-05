@@ -212,7 +212,7 @@
             <textarea
               v-model="privateKeyInput"
               rows="5"
-              class="w-full rounded-md py-2 px-3 text-black text-sm outline-none mb-6"
+              class="w-full rounded-md border py-2 px-3 text-black text-sm outline-none mb-6"
             ></textarea>
             <div class="flex gap-3 mt-2">
               <button

