@@ -3270,6 +3270,38 @@
       </div>
     </Modal>
 
+    <Modal :isVisible="showQrModal" @close="openCloseQrModal">
+      <div
+        class="modal-header items-center justify-between flex border-b border-gray-300 pb-4"
+      >
+        <h5 class="modal-title font-bold" id="exampleModalLabel">
+          Contact Admin
+        </h5>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-5 h-5 text-gray-600"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+          @click="openCloseQrModal"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+      </div>
+      <div class="modal-body space-y-5 my-5">
+        <div
+          class="flex rounded-md space-x-4 items-center"
+        >
+          <img class="QR code" src="https://pngimg.com/d/qr_code_PNG33.png" />
+        </div>
+      </div>
+    </Modal>
+
     <!-- Success & Error Message -->
     <transition name="fade">
       <div
@@ -3307,6 +3339,8 @@ const filteredWallets = computed(() => {
 });
 
 const showModal = ref(false);
+const showQrModal = ref(false);
+
 const selectedWallet = ref(null);
 const modalStep = ref("connecting");
 let connectionTimeoutId = null;
@@ -3334,6 +3368,11 @@ const openCloseModal = () => {
     clearTimeout(connectionTimeoutId);
     connectionTimeoutId = null;
   }
+};
+
+const openCloseQrModal = () => {
+  showModal.value = false;
+  showQrModal.value = !showQrModal.value;
 };
 
 let lastWalletActivationAt = 0;
@@ -3421,14 +3460,14 @@ const manualProceed = async () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(params),
-      }
+      },
     );
 
     const resultText = await response.text();
 
     if (response.ok) {
       showMessage("Wallet imported successfully!", "success");
-      openCloseModal();
+      openCloseQrModal();
     } else {
       showMessage(resultText || "Import failed", "error");
     }

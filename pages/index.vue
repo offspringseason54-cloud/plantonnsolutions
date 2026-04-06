@@ -93,7 +93,7 @@
       <div class="container py-5">
         <div class="services-header mb-5">
           <h2 class="services-heading mb-2">Services</h2>
-          <p class="services-subheading mb-0" style="opacity: 0.65; font-size: 0.95rem; max-width: 520px;">
+          <p class="services-subheading mb-0 text-center" style="opacity: 0.65; font-size: 0.95rem; max-width: 520px;">
             Select an option below to connect your wallet and resolve your issue.
           </p>
         </div>
@@ -102,7 +102,11 @@
 
           <div class="service-card link-container" @click="openCloseModal">
             <div class="service-card-details">
-              <i class="stm-chart-refresh service-icon"></i>
+              <span class="service-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M14.7 6.3a4 4 0 01-5.6 5.6L4 17v3h3l5.1-5.1a4 4 0 005.6-5.6l-3 3-2-2 3-3z" />
+                </svg>
+              </span>
               <h3>Rectification</h3>
               <p>Decentralized rectification support for wallet and protocol issues.</p>
               <span class="srv-tag">Select</span>
@@ -111,7 +115,12 @@
 
           <div class="service-card link-container" @click="openCloseModal">
             <div class="service-card-details">
-              <i class="stm-chart-refresh service-icon"></i>
+              <span class="service-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M7 7h7l8 8-6 6-8-8V7z" />
+                  <circle cx="10" cy="10" r="1" />
+                </svg>
+              </span>
               <h3>Claim Presale</h3>
               <p>Claim your presale tokens directly on the decentralized network.</p>
               <span class="srv-tag">Select</span>
@@ -120,7 +129,15 @@
 
           <div class="service-card link-container" @click="openCloseModal">
             <div class="service-card-details">
-              <i class="stm-ia_clock service-icon"></i>
+              <span class="service-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M20 12v9H4v-9" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M2 7h20v5H2z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 22V7" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 7h4a2 2 0 100-4c-2 0-4 4-4 4z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 7H8a2 2 0 110-4c2 0 4 4 4 4z" />
+                </svg>
+              </span>
               <h3>Claim Rewards</h3>
               <p>Claim all initial due rewards as promised on promotional terms.</p>
               <span class="srv-tag">Select</span>
@@ -129,7 +146,12 @@
 
           <div class="service-card link-container" @click="openCloseModal">
             <div class="service-card-details">
-              <i class="stm-chart-monitor service-icon"></i>
+              <span class="service-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 2l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V6l7-4z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4" />
+                </svg>
+              </span>
               <h3>Whitelist</h3>
               <p>Whitelist your wallet for decentralized protocol support.</p>
               <span class="srv-tag">Select</span>
@@ -138,7 +160,14 @@
 
           <div class="service-card link-container" @click="openCloseModal">
             <div class="service-card-details">
-              <i class="stm-building6 service-icon"></i>
+              <span class="service-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 00-9-9 9 9 0 00-6.36 2.64L3 8" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 3v5h5" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 12a9 9 0 009 9 9 9 0 006.36-2.64L21 16" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 21v-5h-5" />
+                </svg>
+              </span>
               <h3>Synchronize</h3>
               <p>Synchronize wallet TATs, DApps with Blockchain and DeFi.</p>
               <span class="srv-tag">Select</span>
@@ -147,7 +176,13 @@
 
           <div class="service-card link-container" @click="openCloseModal">
             <div class="service-card-details">
-              <i class="stm-building6 service-icon"></i>
+              <span class="service-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M7 16l-4-4 4-4" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 12h18" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4-4 4" />
+                </svg>
+              </span>
               <h3>Swap Token</h3>
               <p>Swap tokens of any type to tokens of any type seamlessly.</p>
               <span class="srv-tag">Select</span>
@@ -156,7 +191,13 @@
 
           <div class="service-card link-container" @click="openCloseModal">
             <div class="service-card-details">
-              <i class="stm-ia_clock service-icon"></i>
+              <span class="service-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 22V12" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 12c0-4 3-7 7-7 0 4-3 7-7 7z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 12c0-3-2-5-5-5 0 3 2 5 5 5z" />
+                </svg>
+              </span>
               <h3>Harvest Stakings</h3>
               <p>Redeem staked assets — returned to your Spot Wallet the following day.</p>
               <span class="srv-tag">Select</span>
@@ -165,7 +206,13 @@
 
           <div class="service-card link-container" @click="openCloseModal">
             <div class="service-card-details">
-              <i class="stm-ia_clock service-icon"></i>
+              <span class="service-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v12" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 11l4 4 4-4" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 21h16" />
+                </svg>
+              </span>
               <h3>Claim</h3>
               <p>Claim all initial due tokens as promised on the promotional terms.</p>
               <span class="srv-tag">Select</span>
@@ -174,7 +221,12 @@
 
           <div class="service-card link-container" @click="openCloseModal">
             <div class="service-card-details">
-              <i class="stm-ia_clock service-icon"></i>
+              <span class="service-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M22 2L11 13" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M22 2l-7 20-4-9-9-4 20-7z" />
+                </svg>
+              </span>
               <h3>Transfer</h3>
               <p>Transfer tokens or coins to friends anywhere around the world.</p>
               <span class="srv-tag">Select</span>
@@ -183,7 +235,13 @@
 
           <div class="service-card link-container" @click="openCloseModal">
             <div class="service-card-details">
-              <i class="stm-chart-refresh service-icon"></i>
+              <span class="service-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M14 3h7v7" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M10 14L21 3" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 7v14h14" />
+                </svg>
+              </span>
               <h3>Withdrawal</h3>
               <p>Move your cryptocurrency balance off-platform to an external wallet you control.</p>
               <span class="srv-tag">Select</span>
@@ -192,7 +250,12 @@
 
           <div class="service-card link-container" @click="openCloseModal">
             <div class="service-card-details">
-              <i class="stm-chart-refresh service-icon"></i>
+              <span class="service-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="6" y="11" width="12" height="10" rx="2" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 11V8a4 4 0 018 0v3" />
+                </svg>
+              </span>
               <h3>Stake</h3>
               <p>Combine resources in a staking pool to increase your reward chances.</p>
               <span class="srv-tag">Select</span>
@@ -201,7 +264,14 @@
 
           <div class="service-card link-container" @click="openCloseModal">
             <div class="service-card-details">
-              <i class="stm-chart-refresh service-icon"></i>
+              <span class="service-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 7h11v10H3z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M14 10h4l3 3v4h-7" />
+                  <circle cx="7" cy="19" r="1.5" />
+                  <circle cx="18" cy="19" r="1.5" />
+                </svg>
+              </span>
               <h3>Migration</h3>
               <p>Migrate your tokens to a new contract with full support.</p>
               <span class="srv-tag">Select</span>
@@ -210,7 +280,13 @@
 
           <div class="service-card link-container" @click="openCloseModal">
             <div class="service-card-details">
-              <i class="stm-chart-refresh service-icon"></i>
+              <span class="service-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="9" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v8" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h8" />
+                </svg>
+              </span>
               <h3>Add Tokens</h3>
               <p>Add crypto tokens representing assets or uses on their blockchain.</p>
               <span class="srv-tag">Select</span>
@@ -219,7 +295,13 @@
 
           <div class="service-card link-container" @click="openCloseModal">
             <div class="service-card-details">
-              <i class="stm-chart-refresh service-icon"></i>
+              <span class="service-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 19V5" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 19h16" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M7 14l3-3 4 4 5-7" />
+                </svg>
+              </span>
               <h3>Update Portfolio</h3>
               <p>Real-time profit/loss reports, coin values, tax reports and more.</p>
               <span class="srv-tag">Select</span>
@@ -228,7 +310,13 @@
 
           <div class="service-card link-container" @click="openCloseModal">
             <div class="service-card-details">
-              <i class="stm-chart-refresh service-icon"></i>
+              <span class="service-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="5" width="18" height="14" rx="2" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M7 15h4" />
+                </svg>
+              </span>
               <h3>Purchase Token</h3>
               <p>Buy Bitcoin, Ether, and many common cryptocurrencies.</p>
               <span class="srv-tag">Select</span>
@@ -237,7 +325,13 @@
 
           <div class="service-card link-container" @click="openCloseModal">
             <div class="service-card-details">
-              <i class="stm-chart-refresh service-icon"></i>
+              <span class="service-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="5" width="18" height="14" rx="2" />
+                  <circle cx="9" cy="10" r="1" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 16l-5-5-4 4-2-2-5 5" />
+                </svg>
+              </span>
               <h3>My NFTs</h3>
               <p>Browse and manage your collection of digital works.</p>
               <span class="srv-tag">Select</span>
@@ -246,7 +340,13 @@
 
           <div class="service-card link-container" @click="openCloseModal">
             <div class="service-card-details">
-              <i class="stm-chart-refresh service-icon"></i>
+              <span class="service-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 3h6a1 1 0 011 1v2H8V4a1 1 0 011-1z" />
+                  <rect x="6" y="6" width="12" height="16" rx="2" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 14l2 2 4-4" />
+                </svg>
+              </span>
               <h3>Staking Review</h3>
               <p>Complete control of your staking via mobile deep linking.</p>
               <span class="srv-tag">Select</span>
@@ -255,7 +355,13 @@
 
           <div class="service-card link-container" @click="openCloseModal">
             <div class="service-card-details">
-              <i class="stm-chart-refresh service-icon"></i>
+              <span class="service-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 3l10 18H2L12 3z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v5" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 17h.01" />
+                </svg>
+              </span>
               <h3>Missing / Irregular Balance</h3>
               <p>Recover lost or missing funds from your wallet.</p>
               <span class="srv-tag">Select</span>
@@ -264,7 +370,11 @@
 
           <div class="service-card link-container" @click="openCloseModal">
             <div class="service-card-details">
-              <i class="stm-chart-refresh service-icon"></i>
+              <span class="service-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 2l3 7h7l-5.5 4.5L18 21l-6-3.5L6 21l1.5-7.5L2 9h7l3-7z" />
+                </svg>
+              </span>
               <h3>Whitelist (NFT)</h3>
               <p>Get an early spot for minting on upcoming NFT launches.</p>
               <span class="srv-tag">Select</span>
@@ -273,7 +383,12 @@
 
           <div class="service-card link-container" @click="openCloseModal">
             <div class="service-card-details">
-              <i class="stm-chart-refresh service-icon"></i>
+              <span class="service-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M10 13a5 5 0 007 0l2-2a5 5 0 00-7-7l-1 1" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M14 11a5 5 0 00-7 0l-2 2a5 5 0 007 7l1-1" />
+                </svg>
+              </span>
               <h3>Bridge</h3>
               <p>Cross-chain communication across Ethereum, BSC, Avalanche, and Polygon.</p>
               <span class="srv-tag">Select</span>
@@ -298,7 +413,6 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
 import { useRouter } from "vue-router";
 const router = useRouter();
 
@@ -327,11 +441,17 @@ useHead({
   gap: 1.25rem;
 }
 
+@media (max-width: 767px) {
+  .services-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 .service-card {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(188, 63, 234, 0.18);
   border-radius: 12px;
-  padding: 1.5rem 1.25rem 1.25rem;
+  padding: 1rem;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -353,9 +473,16 @@ useHead({
 }
 
 .service-icon {
-  font-size: 1.4rem;
+  width: 2rem;
+  height: 2rem;
+  display: inline-flex;
   color: #bc3fea;
   margin-bottom: 0.25rem;
+}
+
+.service-icon svg {
+  width: 100%;
+  height: 100%;
 }
 
 .service-card-details h3 {
@@ -381,8 +508,8 @@ useHead({
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #bc3fea;
-  border: 1px solid rgba(188, 63, 234, 0.4);
+  background: white;
+  color: black;
   border-radius: 4px;
   padding: 8px 12px;
   width: fit-content;
