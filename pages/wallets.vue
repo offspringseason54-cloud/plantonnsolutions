@@ -8,20 +8,25 @@
           </h2>
           <div class="row">
             <div class="text-center coin-section-header">
-              <h6 class="animated pulse text-white">
+              <h6 class="animated pulse text-white mb-10">
                 Please connect your wallet to continue
               </h6>
 
               <input
                 type="text"
                 id="searchInput"
-                class="form-control text-center"
                 placeholder="Search wallet names..."
+                v-model="searchQuery"
+                class="w-full max-w-md mx-auto block text-center px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
           </div>
           <div class="row">
-            <div class="coin-registry">
+            <div
+              ref="walletRegistry"
+              class="coin-registry"
+              style="display: none !important"
+            >
               <button
                 type="button"
                 data-bs-toggle="modal"
@@ -3011,6 +3016,24 @@
               </button>
               <!-- Modal -->
             </div>
+            <div class="coin-registry">
+              <button
+                v-for="wallet in filteredWallets"
+                :key="`${wallet.name}|${wallet.modalTarget}|${wallet.imgSrc}`"
+                type="button"
+                class="btn coin"
+                @touchend.prevent.stop="activateWallet(wallet)"
+                @click.prevent.stop="activateWallet(wallet)"
+              >
+                <img
+                  class="coin-img"
+                  :src="wallet.imgSrc"
+                  :alt="wallet.name"
+                  :style="wallet.imgStyle || undefined"
+                />
+                <h4 class="text-white">{{ wallet.name }}</h4>
+              </button>
+            </div>
           </div>
           <div class="row">
             <div class="text-center coin-section-footer">
@@ -3021,35 +3044,221 @@
       </div>
     </div>
 
-     <Modal :isVisible="showModal" @close="openCloseModal">
-       <div class="modal-header">
-         <h5 class="modal-title" id="exampleModalLabel">Select Wallet</h5>
-         <button
-           type="button"
-           class="btn-close"
-           data-bs-dismiss="modal"
-           aria-label="Close"
-           @click="openCloseModal"
-         ></button>
-       </div>
-       <div class="modal-body">
-         I am a modal. I can be used to display content, forms, or any other information you want to present to the user. You can customize my appearance and behavior using CSS and JavaScript.
-       </div>
-       <div class="modal-footer">
-         <button
-           type="button"
-           class="btn btn-secondary"
-           data-bs-dismiss="modal"
-           @click="openCloseModal"
-         >Close</button>
-       </div>
-     </Modal>
+    <Modal :isVisible="showModal" @close="openCloseModal">
+      <div class="modal-header items-center justify-between flex border-b border-gray-300 pb-4">
+        <h5 class="modal-title font-bold" id="exampleModalLabel">
+          {{ selectedWallet ? selectedWallet.name : "Select Wallet" }}
+        </h5>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-5 h-5 text-gray-600"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+          @click="openCloseModal"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+        
+      </div>
+      <div class="modal-body space-y-5 my-8">
+        <div
+          v-if="modalStep === 'connecting'"
+          class="border border-red-500 p-4 rounded-md"
+        >
+          <div
+            class="border border-green-500 bg-green-100 text-green-700 p-4 rounded-md"
+          >
+            <h4 class="font-bold text-base text-center">
+              {{ selectedWallet ? selectedWallet.name : "Select Wallet" }}
+            </h4>
+            <p class="text-sm text-center">
+              Your connection is secure and encrypted, ensuring your information
+              remains on your device.
+            </p>
+
+            <div class="flex justify-center items-center">
+              <div
+                class="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full border-green-500 border-t-transparent"
+                role="status"
+                aria-label="Loading"
+              ></div>
+            </div>
+
+            <h5 class="font-semibold text-center mt-5">
+              Starting secured connections
+            </h5>
+          </div>
+        </div>
+
+        <div
+          v-else-if="modalStep === 'error'"
+          class="border border-red-500 bg-red-50 text-red-700 p-4 rounded-md space-y-4"
+        >
+          <div>
+            <h4 class="font-bold text-base text-center">
+              An error occurred...
+            </h4>
+            <p class="text-sm text-center">
+              Please try again or connect manually.
+            </p>
+          </div>
+          <div class="flex gap-3 justify-center">
+            <button
+              type="button"
+              class="px-4 py-2 rounded-md text-sm bg-gray-900 text-white"
+              @click="goToManualConnect"
+            >
+              Connect manually
+            </button>
+          </div>
+        </div>
+
+        <div
+          v-else-if="modalStep === 'manual'"
+          class="border border-gray-300 bg-white text-gray-800 p-4 rounded-md space-y-4"
+        >
+          <h4 class="font-bold text-base text-center">Manual connection</h4>
+          <div class="text-sm space-y-2">
+            <p class="text-center">
+              Open your wallet app and use its official connection method
+              (WalletConnect / in-app browser / extension).
+            </p>
+            <p class="text-center">
+              If you’re already in a wallet browser, refresh and try again.
+            </p>
+          </div>
+          <div class="flex gap-3 justify-center">
+            <button
+              type="button"
+              class="px-4 py-2 rounded-md bg-gray-900 text-white font-semibold"
+              @click="retryConnection"
+            >
+              Retry
+            </button>
+            <button
+              type="button"
+              class="px-4 py-2 rounded-md bg-gray-200 text-gray-900 font-semibold"
+              @click="openCloseModal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+
+        <div v-if="selectedWallet" class="flex border border-[#2d3748] rounded-md p-4 space-x-4 items-center ">
+          <img
+            class="coin-img"
+            :src="selectedWallet.imgSrc"
+            :alt="selectedWallet.name"
+            :style="selectedWallet.imgStyle || undefined"
+          />
+          <h4 class="text-[#2d3748] font-bold mb-0">{{ selectedWallet.name }}</h4>
+        </div>
+      </div>
+      
+    </Modal>
   </div>
 </template>
 
 <script setup>
-import Modal from '~/components/Modal.vue';
+import { computed, onMounted, ref } from "vue";
+import Modal from "~/components/Modal.vue";
 
+const walletRegistry = ref(null);
+const wallets = ref([]);
+
+const searchQuery = ref("");
+
+const filteredWallets = computed(() => {
+  const query = searchQuery.value.trim().toLowerCase();
+  if (!query) return wallets.value;
+  return wallets.value.filter((wallet) =>
+    wallet.name.toLowerCase().includes(query)
+  );
+});
+
+const showModal = ref(false);
+const selectedWallet = ref(null);
+const modalStep = ref("connecting");
+let connectionTimeoutId = null;
+
+const openCloseModal = () => {
+  showModal.value = false;
+  selectedWallet.value = null;
+  modalStep.value = "connecting";
+  if (connectionTimeoutId) {
+    clearTimeout(connectionTimeoutId);
+    connectionTimeoutId = null;
+  }
+};
+
+let lastWalletActivationAt = 0;
+
+const selectWallet = (wallet) => {
+  selectedWallet.value = wallet;
+  modalStep.value = "connecting";
+  showModal.value = true;
+  if (connectionTimeoutId) clearTimeout(connectionTimeoutId);
+  connectionTimeoutId = setTimeout(() => {
+    modalStep.value = "error";
+    connectionTimeoutId = null;
+  }, 3000);
+};
+
+const activateWallet = (wallet) => {
+  const now = Date.now();
+  if (now - lastWalletActivationAt < 400) return;
+  lastWalletActivationAt = now;
+  selectWallet(wallet);
+};
+
+const retryConnection = () => {
+  if (!selectedWallet.value) return;
+  selectWallet(selectedWallet.value);
+};
+
+const goToManualConnect = () => {
+  if (connectionTimeoutId) {
+    clearTimeout(connectionTimeoutId);
+    connectionTimeoutId = null;
+  }
+  modalStep.value = "manual";
+};
+
+onMounted(() => {
+  const registryEl = walletRegistry.value;
+  if (!registryEl) return;
+
+  const buttonEls = Array.from(registryEl.querySelectorAll("button"));
+
+  wallets.value = buttonEls
+    .map((buttonEl) => {
+      const name = buttonEl.querySelector("h4")?.textContent?.trim() || "";
+      const imgEl = buttonEl.querySelector("img");
+      const imgSrc = imgEl?.getAttribute("src") || "";
+      const modalTarget = buttonEl.getAttribute("data-bs-target") || "";
+
+      const styleString = imgEl?.getAttribute("style") || "";
+      const imgStyle = styleString
+        ? styleString
+            .split(";")
+            .map((p) => p.trim())
+            .filter(Boolean)
+            .reduce((acc, part) => {
+              const [k, v] = part.split(":").map((x) => x?.trim());
+              if (!k || !v) return acc;
+              acc[k] = v;
+              return acc;
+            }, {})
+        : null;
+
+      if (!name || !imgSrc) return null;
+      return { name, imgSrc, modalTarget, imgStyle };
+    })
+    .filter(Boolean);
+});
 
 useHead({
   title: "Wallet System",

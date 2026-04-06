@@ -1,10 +1,11 @@
 <template>
-  <div v-if="isVisible" class="modal-overlay" @click="closeModal">
-    <div class="modal-content" @click.stop>
-      <!-- <span class="close-icon" @click="closeModal">&times;</span> -->
-      <slot></slot>
+  <Teleport to="body">
+    <div v-if="isVisible" class="modal-overlay" @click="closeModal">
+      <div class="modal-content" @click.stop>
+        <slot></slot>
+      </div>
     </div>
-  </div>
+  </Teleport>
 </template>
 
 <script>
@@ -36,15 +37,15 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 2147483647;
 }
 
 .modal-content {
-  background: #212529;
+  background: #ffffff;
   padding: 20px;
-  border-radius: 30px;
+  border-radius: 10px;
   width: 95%;
-  max-height: 60vh;
+  max-height: 70vh;
   max-width: 70rem;
 }
 
@@ -58,7 +59,7 @@ export default {
 
 @media (min-width: 768px) {
   .modal-content {
-    width: 100%;
+    width: 30%;
   }
 }
 </style>

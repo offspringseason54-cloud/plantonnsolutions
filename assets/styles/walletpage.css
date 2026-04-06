@@ -111,7 +111,7 @@
   background-color: #0c0e29;
 }
 .modal-header {
-  border-bottom: none;
+  /* border-bottom: none; */
 }
 .modal-footer {
   border-top: none;

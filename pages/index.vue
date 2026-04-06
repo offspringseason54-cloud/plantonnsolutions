@@ -5,7 +5,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark pt-3">
           <div class="container-fluid px-0">
             <h2 class="navbar-brand" href="#">
-              Block<span style="color: #bc3fea"> - Chain</span>
+              Web3<span style="color: #bc3fea"> - Maintenance</span>
             </h2>
             <button
               @click="openCloseModal"
@@ -30,7 +30,7 @@
       </div>
       <div class="container d-flex flex-column-reverse flex-md-row">
         <div class="hero-col1 d-flex flex-column justify-content-center">
-          <h2>Block Chains Token</h2>
+          <h2>Web3 Maintenance</h2>
           <p class="desc heading-L">
             TOKEN SWAP & CLAIM TOKEN BRIDGE • LIQUIDITY POOL AND FARM • DEPOSITS
             AND WITHDRAWALS • TOKENS STAKE AND UNSTAKE • LEDGER AND TREZOR
@@ -40,7 +40,7 @@
             ISSUES
           </p>
           <a
-            @click="openCloseModal"
+            href="#services"
             class="btn d-inline-block hero-btn me-3 py-2 align-self-start"
             >Start Here</a
           >
@@ -96,7 +96,7 @@
       <div class="container">
         <h2 class="services-heading pb-5">Services</h2>
         <p class="services-desc pb-5" style="display: none">
-          Block Chains Token is a decentralized protocol. dConnect create an
+          Web3 Maintenance is a decentralized protocol. dConnect create an
           innovative open-source software ecosystem that is both secure and
           resilient. And it allows developers to create new online tools, many
           of which have the interest of global business markets. Validation of
@@ -405,7 +405,7 @@
       >
         <p>Ready to resolve your blockchain issues?</p>
         <p>We are here to provide help.</p>
-        <a @click="openCloseModal" class="btn d-inline-block hero-btn me-3 py-2"
+        <a href="#services" class="btn d-inline-block hero-btn me-3 py-2"
           >Start Here</a
         >
       </div>
@@ -426,7 +426,7 @@ const openCloseModal = () => {
 
 useHead({
   title:
-    "Block Chains Token - Web3 Toolkit for Wallet Connection and On-Chain Tasks",
+    "Web3 Maintenance - Web3 Toolkit for Wallet Connection and On-Chain Tasks",
   meta: [
     {
       name: "description",
