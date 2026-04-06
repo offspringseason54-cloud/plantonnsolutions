@@ -6,7 +6,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark pt-4 pb-3">
           <div class="container-fluid px-0">
             <h2 class="navbar-brand mb-0" href="#">
-              Web3<span style="color: #bc3fea"> — Maintenance</span>
+              Web3<span style="color: #bc3fea">—Maintenance</span>
             </h2>
             <button
               @click="openCloseModal"

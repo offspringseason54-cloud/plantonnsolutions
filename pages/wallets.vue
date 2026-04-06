@@ -4,7 +4,7 @@
       <div class="content-box-md">
         <div class="container">
           <h2 class="text-white mx-auto d-block text-center py-2" href="#">
-            Block<span style="color: #bc3fea">-Chain</span>
+            Web3<span style="color: #bc3fea">-Maintenance</span>
           </h2>
           <div class="row">
             <div class="text-center coin-section-header">
