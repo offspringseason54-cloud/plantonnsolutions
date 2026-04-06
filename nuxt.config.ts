@@ -7,8 +7,9 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss'
   ],
   css: [
-    
     './assets/styles/stmicons.css',
+    './assets/styles/main.css',
+    './assets/styles/walletpage.css',
     
   ],
   app: {

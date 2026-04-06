@@ -411,21 +411,17 @@
       </div>
     </footer>
 
-    <Modal :isVisible="showModal" @close="openCloseModal">
-      <SelectWallets />
-    </Modal>
+  
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
-import Modal from "@/components/Modal.vue";
-import SelectWallets from "@/components/SelectWallets.vue";
-
-const showModal = ref(false);
+import { useRouter } from "vue-router";
+const router = useRouter();
 
 const openCloseModal = () => {
-  showModal.value = !showModal.value;
+  router.push("/wallets");
 };
 
 useHead({
